@@ -1,4 +1,4 @@
-<body style="background-color: #34acd2; background: asset; background-image: url(asset/bg.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; image-rendering: -webkit-optimize-contrast;">
+<body>
 <div class="div">
     <div class="div-2">
       <img
@@ -9,12 +9,13 @@
       <div class="div-3">Feedback Form</div>
       <div class="div-4">Which department are you from?</div>
       <form class="gform-submission"></form>
-      <div class="div-5 dropbtn" onclick="toggleDropdown()">
-        <div class="div-6" id="selectedOption">DH</div>
+      <div class="div-5" onclick="toggleDropdown()">
+        <div class="div-6" id="selectedOption" onclick="toggleDropdown()">DH</div>
         <img
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/ed8f4327c24fab957734e0b53b516bcf894b16711e4152026fa4e3e7a54fb274?"
           class="img-2"
+          onclick="toggleDropdown()"
         />
         <div id="myDropdown" class="dropdown-content">
           <a onclick="updateOption('HRD')">HRD</a>
@@ -44,6 +45,14 @@
     </div>
   </div></body>
   <style>
+    .body {
+      background-color: #34acd2;
+      background: asset;
+      background-image: url(asset/bg.jpg);
+      background-position: center; background-repeat: no-repeat;
+      background-size: cover;
+      image-rendering: -webkit-optimize-contrast;
+    }
     .div {
       display: flex;
       align-items: center;
@@ -210,8 +219,8 @@
     label {
         font: 400 15px Inter, sans-serif;
         display: inline-block;
-        margin-left: 8px;
-        margin-right: 8px;
+        margin-left: 7px;
+        margin-right: 7px;
     }
 
     .radio {
