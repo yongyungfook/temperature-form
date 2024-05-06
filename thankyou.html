@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Temperature Feedback</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="div">
+        <div class="div-2">
+            <img loading="lazy" src="asset/thankyou.png" class="img" />
+
+            <div class="div-3">Thank you for your feedback, have a good day ahead!</div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #34acd2;
+        background: asset;
+        background-image: url(asset/bg.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    .div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .div-2 {
+        background-color: #fff;
+        display: flex;
+        width: 320px;
+        max-width: 100%;
+        height: 500px;
+        max-height: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 1px 11px 20px;
+        border-radius: 25px;
+        box-shadow: 5px 10px #888888;
+    }
+
+    .img {
+        aspect-ratio: 1.06;
+        object-fit: auto;
+        object-position: center;
+        width: 220px;
+        margin-top: 100px;
+    }
+
+    .div-3 {
+        color: #000;
+        text-align: center;
+        margin-top: 10px;
+        font: 500 18px medium, sans-serif;
+    }
+</style>
