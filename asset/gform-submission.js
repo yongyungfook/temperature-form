@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
     function submit_as_gform($el){
         $el.attr("action");
         var targetUrl = "?https://docs.google.com/forms/d/e/"
-                      + $el.attr("action")
+                      + '1FAIpQLSe_3lYy8jPA8q3UgXsw0ZqXxvhokxuZqwe9zkAD6wIN1wcfyA'
                       + "/formResponse"
                       + "?"
                       + $el.serialize()
@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
             .then(function(data){
                 var link_submit = data.match(/<a href="(.*?)">Submit another response<\/a>/)[1];
 
-                window.location = "./thankyou.html";
+                window.location.href = '/thankyou';
             })
             .catch(e => {
                 console.log(e);
