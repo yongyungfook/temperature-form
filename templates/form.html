@@ -58,6 +58,7 @@
           <label><input type="radio" name="entry.1231552605" value="Too Hot"/>Too Hot</label>
         </div>
         <input type="hidden" name="entry.2022131953" id="departmentInput" value="" />
+        <input type="hidden" name="entry.343562342"  id="temperatureInput" value="" />
         <input type="submit" value="Submit" class="div-20" />
 
       </div>
@@ -269,8 +270,14 @@
   }
 </style>
 <script src="../asset/gform-submission.js"></script>
-<script>
-  //in case the person didn't touch the department option
+<script type="module">
+  import CONFIG from '../asset/config.js';
+
+  window.captureDepartment = captureDepartment;
+  window.toggleDropdown = toggleDropdown;
+  window.updateOption = updateOption;
+
+  // Ensure the department is captured if not selected
   captureDepartment();
 
   function toggleDropdown() {
@@ -279,36 +286,71 @@
 
   function updateOption(optionText) {
     document.getElementById('selectedOption').textContent = optionText;
-
     captureDepartment();
   }
 
   function captureDepartment() {
     var departmentText = document.getElementById("selectedOption").textContent;
-
     document.getElementById("departmentInput").value = departmentText;
 
+    switch(departmentText) {
+      case "Reception":
+        retrieveTemperature(CONFIG.RECEPTION_GID);
+        break;
+      case "DH West":
+      case "DH East":
+        retrieveTemperature(CONFIG.DH_GID);
+        break;
+      case "BDD":
+        retrieveTemperature(CONFIG.BDD_GID);
+        break;
+      case "PLD Manager":
+      case "PLD":
+        retrieveTemperature(CONFIG.PLD_GID);
+        break;
+      case "FIN":
+        retrieveTemperature(CONFIG.FIN_GID);
+        break;
+      case "System":
+      case "System Manager":
+        retrieveTemperature(CONFIG.SYS_GID);
+        break;
+      case "Network AC5":
+        retrieveTemperature(CONFIG.NET_AC5_GID);
+        break;
+      case "Network AC4":
+        retrieveTemperature(CONFIG.NET_AC4_GID);
+        break;
+      case "Meeting Room 1":
+        retrieveTemperature(CONFIG.MEET1_GID);
+        break;
+      case "Meeting Room 2":
+        retrieveTemperature(CONFIG.MEET2_GID);
+        break;
+    }
   }
 
-  const checkboxes = document.querySelectorAll('.scale-checkbox');
+  function retrieveTemperature(gid) {
+    const BASE_URL = `${CONFIG.BASE_URL}${gid}&range=B2`;
 
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('click', () => {
-      checkboxes.forEach(cb => {
-        if (cb !== checkbox) {
-          cb.checked = false; // Uncheck other checkboxes
-        }
-      });
-    });
-  });
+    fetch(BASE_URL)
+      .then(response => response.text())
+      .then(text => {
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+        const firstCell = json.table.rows[0].c[0] ? json.table.rows[0].c[0].v : '';
+        document.getElementById('temperatureInput').value = firstCell;
+        console.log("" + firstCell);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }
+
+
 
   // Close the dropdown if the user clicks outside of it
-  window.onclick = function (event) {
+  window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
-
       var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
+      for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
